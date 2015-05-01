@@ -16,6 +16,10 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
         <servlet-name>StockDetailsServlet</servlet-name>
         <servlet-class>ac.il.javacourse.StockDetailsServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>PortfolioServlet</servlet-name>
+        <servlet-class>ac.il.javacourse.servlet.PortfolioServlet</servlet-class>
+    </servlet>
 	<servlet-mapping>
 		<servlet-name>First_project</servlet-name>
 		<url-pattern>/first_project</url-pattern>
@@ -27,8 +31,12 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
     <servlet-mapping>
        <servlet-name>StockDetailsServlet</servlet-name>
        <url-pattern>/stockdetailsservlet</url-pattern>
-    </servlet-mapping>  
-	<welcome-file-list>
+    </servlet-mapping>
+    <servlet-mapping>
+		<servlet-name>PortfolioServlet</servlet-name>
+		<url-pattern>/portfolioservlet</url-pattern>
+	</servlet-mapping>
+    	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>
 	</welcome-file-list>
 </web-app>
