@@ -1,8 +1,10 @@
-package ac.il.javacourse;
+package ac.il.javacourse.model;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 public class Stock {
+	
+	/* This class represents stock of stocks*/
 	
 	public static final int BUY = 0;
 	public static final int SELL = 1;
@@ -21,6 +23,19 @@ public class Stock {
 		this.ask=ask;
 		this.bid=bid;
 		this.date=date;
+		this.recommendation=0;
+		this.stockQuantity=0;
+	}
+	
+	/* C'tors of Stock */
+	
+	public Stock(Stock stock){
+		this.setSymbol(new String (stock.getSymbol()));
+		this.setAsk(stock.getAsk());
+		this.setBid(stock.getBid());
+		this.date=new Date(stock.getDate().getTime());
+		this.recommendation=stock.getRecommendation();
+		this.stockQuantity=stock.getStockQuantity();
 	}
 	
 	

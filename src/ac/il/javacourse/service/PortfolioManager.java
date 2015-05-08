@@ -1,21 +1,22 @@
-	package ac.il.javacourse.service;
-import ac.il.javacourse.StockDetailsServlet;
+package ac.il.javacourse.service;
 
-import java.util.Calendar;
 import java.util.Date;
+import java.util.Calendar;
 
-import ac.il.javacourse.Stock;
 import ac.il.javacourse.model.Portfolio;
+import ac.il.javacourse.model.Stock;
 
 public class PortfolioManager {
+	
+	/* This class is a portfolio manager , it will execute methods of portfolio*/
 	
 	public Portfolio getPortfolio()
 	{
 		Calendar cal=Calendar.getInstance();
 		cal.set(2014, 10, 15);
-		Date date1=cal.getTime();
-		Date date2=cal.getTime();
-		Date date3=cal.getTime();
+		Date date1=(Date) cal.getTime();
+		Date date2=(Date) cal.getTime();
+		Date date3=(Date) cal.getTime();
 		
 		Portfolio portfolio = new Portfolio();
 		portfolio.setTitle("targil 5 portfolio");
