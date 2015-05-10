@@ -16,19 +16,31 @@ public class Portfolio {
 		this.portfolioSize=0;
 	}
 	
+	public Portfolio(String string) {
+		this.Title = string;
+		this.stocks = new Stock[MAX_PORTFOLIO_SIZE];
+		this.portfolioSize = 0;
+	}
+	
 	/* C'tors of portfolio */ 
 	
-	public Portfolio(Portfolio portfolio){
-		this.setTitle(new String (portfolio.getTitle()));
+	public Portfolio (Portfolio oldPortfolio){
+		        this(oldPortfolio.getTitle());
+				this.portfolioSize=(oldPortfolio.getPortfolioSize());
+		 		
+		 		this.portfolioSize = oldPortfolio.getPortfolioSize();
+		 		
+		 		copyStocksArray(oldPortfolio.getStocks(), this.getStocks());	
+	}
+		 		
+		 		
+	private void copyStocksArray(Stock[] oldStocksArray, Stock[] newStocksArray ){
 		
-		Stock[] coppied=portfolio.getStocks();
+		for(int i = 0; i<this.portfolioSize; i++){
+			newStocksArray[i]= new Stock (oldStocksArray[i]);
 		
-		for(int i=0;i<coppied.length;i++)
-			this.stocks[i]=new Stock(coppied[i]);
-		
-		this.setPortfolioSize(portfolio.getPortfolioSize());
-	}	
-	
+		}
+	}
 	/* method that adds stock to portfolio's array */ 
 	
 	public void addstock(Stock stock)
@@ -48,7 +60,7 @@ public class Portfolio {
 	}
 	
 	/* method that removes a stock from portfolio with the same symbol as received */ 
-    public void removeStock(String stockName){
+public void removeStock(String stockName){
 		
 		for(int i = 0; i< MAX_PORTFOLIO_SIZE; i++){
 			if((this.stocks[i].getSymbol().equals(stockName) == true && stocks[i] != null)){
@@ -58,11 +70,13 @@ public class Portfolio {
 					stocks[i]=null;
 				}
 				portfolioSize--;
-				System.out.println("Stock was deleted as requested");
+				System.out.println("Stock was deleted as per request");
+				return;
 			}
-			
 		}
-}
+		System.out.println("Stock was not found in this Portfolio");
+		return;
+	}
 	
 	public String getHtmlString() 
 	{
