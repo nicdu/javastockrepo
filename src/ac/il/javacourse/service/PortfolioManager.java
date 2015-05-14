@@ -12,24 +12,29 @@ public class PortfolioManager {
 	
 	public Portfolio getPortfolio()
 	{
+		Portfolio myPortfolio = new Portfolio();
+		myPortfolio.setTitle("Exercise 7 portfolio");	
+		myPortfolio.updateBalance(10000);
+		
+		
 		Calendar cal=Calendar.getInstance();
-		cal.set(2014, 10, 15);
+		cal.set(2014, 11, 15);
 		Date date1=(Date) cal.getTime();
 		Date date2=(Date) cal.getTime();
 		Date date3=(Date) cal.getTime();
 		
-		Portfolio portfolio = new Portfolio();
-		portfolio.setTitle("targil 5 portfolio");
+		Stock stock1=new Stock("PIH",10F,8.5F,date1);
+		Stock stock2=new Stock("AAL",30F,25.5F,date2);		
+		Stock stock3=new Stock("CAAS",20F,15.5F,date3);
 		
-		Stock stock1=new Stock("PIH",13.1F,12.4F,date1);
-		Stock stock2=new Stock("AAL",5.78F,5.5F,date2);		
-		Stock stock3=new Stock("CAAS",32.2F,31.5F,date3);
+		myPortfolio.buyStock(stock1, 20);
+		myPortfolio.buyStock(stock2, 30);
+		myPortfolio.buyStock(stock3, 40);
+
+		myPortfolio.sellStock("AAL",-1);
+		myPortfolio.removeStock("CAAS");
 		
-		portfolio.addstock(stock1);
-		portfolio.addstock(stock2);
-		portfolio.addstock(stock3);
-		
-		return (portfolio);
+		return (myPortfolio);
 		
 	}
 

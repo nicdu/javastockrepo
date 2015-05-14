@@ -2,19 +2,16 @@ package ac.il.javacourse.model;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import ac.il.javacourse.model.Portfolio.ALGO_RECOMMENDATION;
 public class Stock {
 	
 	/* This class represents stock of stocks*/
 	
-	public static final int BUY = 0;
-	public static final int SELL = 1;
-	public static final int REMOVE = 2;
-	public static final int HOLD = 3;
-	
 	private String symbol;
 	private float ask,bid;
 	private java.util.Date date;
-	private int recommendation;
+	private ALGO_RECOMMENDATION recommendation;
 	private int stockQuantity;
 	
 	
@@ -23,7 +20,7 @@ public class Stock {
 		this.ask=ask;
 		this.bid=bid;
 		this.date=date;
-		this.recommendation=0;
+		this.recommendation = ALGO_RECOMMENDATION.HOLD;
 		this.stockQuantity=0;
 	}
 	
@@ -39,15 +36,16 @@ public class Stock {
 	}
 	
 	
-	public int getRecommendation() {
+	
+
+
+	public ALGO_RECOMMENDATION getRecommendation() {
 		return recommendation;
 	}
 
-
-	public void setRecommendation(int recommendation) {
+	public void setRecommendation(ALGO_RECOMMENDATION recommendation) {
 		this.recommendation = recommendation;
 	}
-
 
 	public int getStockQuantity() {
 		return stockQuantity;
@@ -89,7 +87,7 @@ public class Stock {
 		DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
 		String dateStr = df.format(getDate());
 
-		String ret= "<br>Stock symbol: </b>"+getSymbol()+" <b>ask: </b>"+getAsk()+"<b> bid: </b>"+getBid()+
+		String ret= "<br>Stock symbol: </b>"+getSymbol()+" <b> ask: </b>"+getAsk()+"<b> bid: </b>"+getBid()+"<b> quantity: </b>"+getStockQuantity()+
 				"<b> date: </b>"+ dateStr;
 		return ret;
 	
