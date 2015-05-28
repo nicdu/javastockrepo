@@ -7,10 +7,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import ac.il.javacourse.model.Portfolio;
-import ac.il.javacourse.model.Portfolio.ALGO_RECOMMENDATION;
-import ac.il.javacourse.model.Stock;
-
 import org.algo.dto.PortfolioDto;
 import org.algo.dto.PortfolioTotalStatus;
 import org.algo.dto.StockDto;
@@ -23,10 +19,14 @@ import org.algo.service.MarketService;
 import org.algo.service.PortfolioManagerInterface;
 import org.algo.service.ServiceManager;
 
+import ac.il.javacourse.model.Portfolio;
+import ac.il.javacourse.model.Portfolio.ALGO_RECOMMENDATION;
+import ac.il.javacourse.model.Stock;
+
 /**
- * This class represents a Portfolio Manager this class will execute different methods of Portfolio.
- * 
+ * Class code to demonstrate new PortfolioManager
  */
+
 public class PortfolioManager implements PortfolioManagerInterface {
 
 
@@ -130,18 +130,18 @@ public class PortfolioManager implements PortfolioManagerInterface {
 
 		try {
 			StockDto stockDto = ServiceManager.marketService().getStock(symbol);
-			
+
 			//get current symbol values from nasdaq.
 			Stock stock = fromDto(stockDto);
-			
+
 			//first thing, add it to portfolio.
 			//portfolio.addStock(stock,0);   
-			//or:
+
 			portfolio.addStock(stock);   
 
 			//second thing, save the new stock to the database.
 			datastoreService.saveStock(toDto(portfolio.findStock(symbol)));
-			
+
 			flush(portfolio);
 		} catch (SymbolNotFoundInNasdaq e) {
 			System.out.println("Stock Not Exists: "+symbol);
@@ -155,12 +155,12 @@ public class PortfolioManager implements PortfolioManagerInterface {
 	public void buyStock(String symbol, int quantity) throws PortfolioException{
 		try {
 			Portfolio portfolio = (Portfolio) getPortfolio();
-			
+
 			Stock stock = (Stock) portfolio.findStock(symbol);
 			if(stock == null) {
 				stock = fromDto(ServiceManager.marketService().getStock(symbol));				
 			}
-			
+
 			portfolio.buyStock(stock, quantity);
 			flush(portfolio);
 		}catch (Exception e) {
@@ -170,7 +170,6 @@ public class PortfolioManager implements PortfolioManagerInterface {
 
 	/**
 	 * update database with new portfolio's data
-	 * @param portfolio
 	 */
 	private void flush(Portfolio portfolio) {
 		datastoreService.updatePortfolio(toDto(portfolio));
@@ -194,12 +193,12 @@ public class PortfolioManager implements PortfolioManagerInterface {
 
 	/**
 	 * toDto - covert Stock to Stock DTO
-	*/
+	 */
 	private StockDto toDto(StockInterface inStock) {
 		if (inStock == null) {
 			return null;
 		}
-		
+
 		Stock stock = (Stock) inStock;
 		return new StockDto(stock.getSymbol(), stock.getAsk(), stock.getBid(), 
 				stock.getDate(), stock.getStockQuantity(), stock.getRecommendation().name());
@@ -251,9 +250,7 @@ public class PortfolioManager implements PortfolioManagerInterface {
 
 	/**
 	 * toDtoList - convert List of Stocks to list of Stock DTO
-	 * @param stocks
-	 * @return stockDto
-	 */
+	*/
 	private List<StockDto> toDtoList(List<Stock> stocks) {
 
 		List<StockDto> ret = new ArrayList<StockDto>();
@@ -264,12 +261,10 @@ public class PortfolioManager implements PortfolioManagerInterface {
 
 		return ret;
 	}	
-	
-	
+
+
 	/**
 	 * A method that returns a new instance of Portfolio copied from another instance.
-	 * @param portfolio		Portfolio to copy.
-	 * @return a new Portfolio object with the same values as the one given.
 	 */
 	public Portfolio duplicatePortfolio(Portfolio portfolio) {
 		Portfolio copyPortfolio = new Portfolio(portfolio);
